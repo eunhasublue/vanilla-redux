@@ -4,17 +4,17 @@ import { createStore } from "redux";
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-export const addToDo = (text) => {
+const addToDo = (text) => {
   return {
     type: ADD,
     text,
   };
 };
 
-export const deleteToDo = (id) => {
+const deleteToDo = (id) => {
   return {
     type: DELETE,
-    id,
+    id: parseInt(id),
   };
 };
 
@@ -23,13 +23,18 @@ const reducer = (state = [], action) => {
     case ADD:
       return [{ text: action.text, id: Date.now() }, ...state];
     case DELETE:
-      return state.filter((toDo) => toDo !== action.id);
+      return state.filter((toDo) => toDo.id !== action.id);
     default:
       return state;
   }
 };
 
 const store = createStore(reducer);
+
+export const actionCreators = {
+  addToDo,
+  deleteToDo,
+};
 
 // 변경사항을 알려줌
 // 변화가 일어나면 어플리케이션을 다시 render하고 싶음 -> 변화가 일어난 부분과 함께
@@ -41,4 +46,3 @@ const store = createStore(reducer);
 export default store;
 
 // redux state로부터 정보를 가지고 올 수 있어야함
-//
