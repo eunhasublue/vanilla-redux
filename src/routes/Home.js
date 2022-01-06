@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import ToDo from "../components/ToDo";
-import { actionCreators } from "../store";
+import { actionCreators, add } from "../store";
 
 // 2 ownProps : component의 props (여기선 Home) : by react-router의해서
 //   - Home에게 준 props들
@@ -67,7 +67,10 @@ function mapDispatchToProps(dispatch) {
   return {
     // dispatch를 호출하는 것
     // addToDo는 text를 인수로 필요하고, 이 함수가 dispatch를 호출
-    addToDo: (text) => dispatch(actionCreators.addToDo(text)),
+    // addToDo: (text) => dispatch(actionCreators.addToDo(text)),
+
+    //createSlice
+    addToDo: (text) => dispatch(add(text)),
   };
 }
 
